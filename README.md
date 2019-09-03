@@ -10,7 +10,7 @@ Table of contents
 
 <!--ts-->
    * [Setup](#Setup)
-      * [*Very* quickstart](#cery-quickstart)
+      * [*Very* quickstart](#very-quickstart)
       * [With Conda](#with-conda)
    * [Usage](#usage)
       * [Yelp Demo](#yelp-demo)
