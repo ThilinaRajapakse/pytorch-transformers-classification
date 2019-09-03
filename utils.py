@@ -123,8 +123,8 @@ class BinaryProcessor(DataProcessor):
 def convert_example_to_feature(example_row, pad_token=0,
 sequence_a_segment_id=0, sequence_b_segment_id=1,
 cls_token_segment_id=1, pad_token_segment_id=0,
-mask_padding_with_zero=True):
-    example, label_map, max_seq_length, tokenizer, output_mode, cls_token_at_end, cls_token, sep_token, cls_token_segment_id, pad_on_left, pad_token_segment_id = example_row
+mask_padding_with_zero=True, sep_token_extra=False):
+    example, label_map, max_seq_length, tokenizer, output_mode, cls_token_at_end, cls_token, sep_token, cls_token_segment_id, pad_on_left, pad_token_segment_id, sep_token_extra = example_row
 
     tokens_a = tokenizer.tokenize(example.text_a)
 
@@ -133,12 +133,14 @@ mask_padding_with_zero=True):
         tokens_b = tokenizer.tokenize(example.text_b)
         # Modifies `tokens_a` and `tokens_b` in place so that the total
         # length is less than the specified length.
-        # Account for [CLS], [SEP], [SEP] with "- 3"
-        _truncate_seq_pair(tokens_a, tokens_b, max_seq_length - 3)
+        # Account for [CLS], [SEP], [SEP] with "- 3". " -4" for RoBERTa.
+        special_tokens_count = 4 if sep_token_extra else 3
+        _truncate_seq_pair(tokens_a, tokens_b, max_seq_length - special_tokens_count)
     else:
-        # Account for [CLS] and [SEP] with "- 2"
-        if len(tokens_a) > max_seq_length - 2:
-            tokens_a = tokens_a[:(max_seq_length - 2)]
+        # Account for [CLS] and [SEP] with "- 2" and with "- 3" for RoBERTa.
+        special_tokens_count = 3 if sep_token_extra else 2
+        if len(tokens_a) > max_seq_length - special_tokens_count:
+            tokens_a = tokens_a[:(max_seq_length - special_tokens_count)]
 
     # The convention in BERT is:
     # (a) For sequence pairs:
@@ -208,12 +210,11 @@ mask_padding_with_zero=True):
 
 def convert_examples_to_features(examples, label_list, max_seq_length,
                                  tokenizer, output_mode,
-                                 cls_token_at_end=False, pad_on_left=False,
+                                 cls_token_at_end=False, sep_token_extra=False, pad_on_left=False,
                                  cls_token='[CLS]', sep_token='[SEP]', pad_token=0,
                                  sequence_a_segment_id=0, sequence_b_segment_id=1,
                                  cls_token_segment_id=1, pad_token_segment_id=0,
-                                 mask_padding_with_zero=True,
-                                 process_count=cpu_count() - 2):
+                                 mask_padding_with_zero=True):
     """ Loads a data file into a list of `InputBatch`s
         `cls_token_at_end` define the location of the CLS token:
             - False (Default, BERT/XLM pattern): [CLS] + A + [SEP] + B + [SEP]
@@ -223,10 +224,13 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
 
     label_map = {label : i for i, label in enumerate(label_list)}
 
-    examples = [(example, label_map, max_seq_length, tokenizer, output_mode, cls_token_at_end, cls_token, sep_token, cls_token_segment_id, pad_on_left, pad_token_segment_id) for example in examples]
+    examples = [(example, label_map, max_seq_length, tokenizer, output_mode, cls_token_at_end, cls_token, sep_token, cls_token_segment_id, pad_on_left, pad_token_segment_id, sep_token_extra) for example in examples]
+
+    process_count = cpu_count() - 2
 
     with Pool(process_count) as p:
         features = list(tqdm(p.imap(convert_example_to_feature, examples), total=len(examples)))
+
 
     return features
 
