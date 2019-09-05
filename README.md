@@ -15,6 +15,7 @@ Table of contents
    * [Usage](#usage)
       * [Yelp Demo](#yelp-demo)
       * [Custom Datasets](#custom-datasets)
+      * [Current Pretrained Models](#current-pretrained-models)
       * [Evaluation Metrics](#evaluation-metrics)
    * [Acknowledgements](#acknowledgements)
 <!--te-->
