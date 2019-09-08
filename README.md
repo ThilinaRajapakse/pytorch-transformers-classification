@@ -100,10 +100,10 @@ The data needs to be in `tsv` format, with four columns, and no header.
 
 This is the required structure.
 
-- guid: An ID for the row.
-- label: The label for the row (should be an int).
-- alpha: A column of the same letter for all rows. Not used in classification but still expected by the `DataProcessor`.
-- text: The sentence or sequence of text.
+- `guid`: An ID for the row.
+- `label`: The label for the row (should be an int).
+- `alpha`: A column of the same letter for all rows. Not used in classification but still expected by the `DataProcessor`.
+- `text`: The sentence or sequence of text.
 
 ### Evaluation Metrics
 
