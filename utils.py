@@ -309,7 +309,3 @@ processors = {
 output_modes = {
     "binary": "classification"
 }
-
-GLUE_TASKS_NUM_LABELS = {
-    "binary": 2
-}
