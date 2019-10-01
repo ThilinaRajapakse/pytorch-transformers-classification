@@ -228,7 +228,7 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
     examples = [(example, label_map, max_seq_length, tokenizer, output_mode, cls_token_at_end, cls_token, sep_token, cls_token_segment_id, pad_on_left, pad_token_segment_id, sep_token_extra) for example in examples]
 
     with Pool(process_count) as p:
-        features = list(tqdm(p.imap(convert_example_to_feature, examples, chunksize=100), total=len(examples)))
+        features = list(tqdm(p.imap(convert_example_to_feature, examples, chunksize=500), total=len(examples)))
 
     return features_length - len(input_ids)
 
