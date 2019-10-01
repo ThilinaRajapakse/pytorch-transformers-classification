@@ -119,7 +119,6 @@ class BinaryProcessor(DataProcessor):
                 InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
         return examples
 
-
 def convert_example_to_feature(example_row, pad_token=0,
 sequence_a_segment_id=0, sequence_b_segment_id=1,
 cls_token_segment_id=1, pad_token_segment_id=0,
@@ -211,7 +210,7 @@ mask_padding_with_zero=True, sep_token_extra=False):
 
 def convert_examples_to_features(examples, label_list, max_seq_length,
                                  tokenizer, output_mode,
-                                 cls_token_at_end=False, pad_on_left=False,
+                                 cls_token_at_end=False, sep_token_extra=False, pad_on_left=False,
                                  cls_token='[CLS]', sep_token='[SEP]', pad_token=0,
                                  sequence_a_segment_id=0, sequence_b_segment_id=1,
                                  cls_token_segment_id=1, pad_token_segment_id=0,
@@ -226,61 +225,10 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
 
     label_map = {label : i for i, label in enumerate(label_list)}
 
-    examples = [(example, label_map, max_seq_length, tokenizer, output_mode, cls_token_at_end, cls_token, sep_token, cls_token_segment_id, pad_on_left, pad_token_segment_id) for example in examples]
-
-    with Pool(process_count) as p:
-        features = list(tqdm(p.imap(convert_example_to_feature, examples, chunksize=100), total=len(examples)))
-
-    return features_length - len(input_ids)
-    if pad_on_left:
-        input_ids = ([pad_token] * padding_length) + input_ids
-        input_mask = ([0 if mask_padding_with_zero else 1] * padding_length) + input_mask
-        segment_ids = ([pad_token_segment_id] * padding_length) + segment_ids
-    else:
-        input_ids = input_ids + ([pad_token] * padding_length)
-        input_mask = input_mask + ([0 if mask_padding_with_zero else 1] * padding_length)
-        segment_ids = segment_ids + ([pad_token_segment_id] * padding_length)
-
-    assert len(input_ids) == max_seq_length
-    assert len(input_mask) == max_seq_length
-    assert len(segment_ids) == max_seq_length
-
-    if output_mode == "classification":
-        label_id = label_map[example.label]
-    elif output_mode == "regression":
-        label_id = float(example.label)
-    else:
-        raise KeyError(output_mode)
-
-    return InputFeatures(input_ids=input_ids,
-                        input_mask=input_mask,
-                        segment_ids=segment_ids,
-                        label_id=label_id)
-    
-
-def convert_examples_to_features(examples, label_list, max_seq_length,
-                                 tokenizer, output_mode,
-                                 cls_token_at_end=False, sep_token_extra=False, pad_on_left=False,
-                                 cls_token='[CLS]', sep_token='[SEP]', pad_token=0,
-                                 sequence_a_segment_id=0, sequence_b_segment_id=1,
-                                 cls_token_segment_id=1, pad_token_segment_id=0,
-                                 mask_padding_with_zero=True):
-    """ Loads a data file into a list of `InputBatch`s
-        `cls_token_at_end` define the location of the CLS token:
-            - False (Default, BERT/XLM pattern): [CLS] + A + [SEP] + B + [SEP]
-            - True (XLNet/GPT pattern): A + [SEP] + B + [SEP] + [CLS]
-        `cls_token_segment_id` define the segment id associated to the CLS token (0 for BERT, 2 for XLNet)
-    """
-
-    label_map = {label : i for i, label in enumerate(label_list)}
-
     examples = [(example, label_map, max_seq_length, tokenizer, output_mode, cls_token_at_end, cls_token, sep_token, cls_token_segment_id, pad_on_left, pad_token_segment_id, sep_token_extra) for example in examples]
-
-    process_count = cpu_count() - 2
 
     with Pool(process_count) as p:
         features = list(tqdm(p.imap(convert_example_to_feature, examples, chunksize=500), total=len(examples)))
-
 
     return features
 
