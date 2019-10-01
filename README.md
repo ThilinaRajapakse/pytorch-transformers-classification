@@ -39,6 +39,7 @@ else:
 `conda install -c anaconda scipy`  
 `conda install -c anaconda scikit-learn`  
 `pip install pytorch-transformers`  
+`pip install tensorboardX`
 3. Clone repo.
 `git clone https://github.com/ThilinaRajapakse/pytorch-transformers-classification.git`
 
