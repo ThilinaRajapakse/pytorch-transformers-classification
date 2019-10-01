@@ -230,7 +230,7 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
     with Pool(process_count) as p:
         features = list(tqdm(p.imap(convert_example_to_feature, examples, chunksize=500), total=len(examples)))
 
-    return features_length - len(input_ids)
+    return features
 
 
 def _truncate_seq_pair(tokens_a, tokens_b, max_length):
