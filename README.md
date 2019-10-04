@@ -5,6 +5,8 @@ This repository is based on the [Pytorch-Transformers](https://github.com/huggin
 
 Please refer to this [Medium article](https://medium.com/p/https-medium-com-chaturangarajapakshe-text-classification-with-transformer-models-d370944b50ca?source=email-6b1e2355088e--writer.postDistributed&sk=f21ffeb66c03a9804572d7063f57c04e) for further information on how this project works.
 
+Check out the new library [simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers) for one line training and evaluating!
+
 Table of contents
 =================
 
