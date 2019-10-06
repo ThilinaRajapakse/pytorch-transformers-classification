@@ -12,6 +12,7 @@ Table of contents
 
 <!--ts-->
    * [Setup](#Setup)
+      * [Simple Transformers](#simple-transformers-ready-to-use-library)
       * [*Very* quickstart](#very-quickstart)
       * [With Conda](#with-conda)
    * [Usage](#usage)
