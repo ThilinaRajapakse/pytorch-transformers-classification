@@ -27,7 +27,7 @@ Table of contents
 
 ### Simple Transformers - Ready to use library
 
-If you want to go directly to training, evaluating, and predicting with Transformer models, take a look at the [Simple Transformers](https://github.com/ThilinaRajapakse/simpletransformers) library. It's the easiest way to use Transformers for text classification with only 3 lines of code required. It's based on this repo but is designed to enable the use of Transformers without having to worry about the low level details. However, ease of usage at the cost of less control (and visibility) over how everything works.
+If you want to go directly to training, evaluating, and predicting with Transformer models, take a look at the [Simple Transformers](https://github.com/ThilinaRajapakse/simpletransformers) library. It's the easiest way to use Transformers for text classification with only 3 lines of code required. It's based on this repo but is designed to enable the use of Transformers without having to worry about the low level details. However, ease of usage comes at the cost of less control (and visibility) over how everything works.
 
 ### Quickstart using Colab
 
