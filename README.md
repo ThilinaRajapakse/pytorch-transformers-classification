@@ -24,7 +24,11 @@ Table of contents
 
 ## Setup
 
-### *Very* quickstart
+### Simple Transformers - Ready to use library
+
+If you want to go directly to training, evaluating, and predicting with Transformer models, take a look at the [Simple Transformers](https://github.com/ThilinaRajapakse/simpletransformers) library. It's the easiest way to use Transformers for text classification with only 3 lines of code required. It's based on this repo but is designed to enable the use of Transformers without having to worry about the low level details at the cost of less control (and visibility) over how everything works.
+
+### Quickstart using Colab
 
 Try this [Google Colab Notebook](colab_quickstart.ipynb) for a quick preview. You can run all cells without any modifications to see how everything works. However, due to the 12 hour time limit on Colab instances, the dataset has been undersampled from 500 000 samples to about 5000 samples. For such a tiny sample size, everything should complete in about 10 minutes.
 
