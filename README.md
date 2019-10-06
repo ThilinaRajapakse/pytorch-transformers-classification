@@ -13,7 +13,7 @@ Table of contents
 <!--ts-->
    * [Setup](#Setup)
       * [Simple Transformers](#simple-transformers---ready-to-use-library)
-      * [*Very* quickstart](#very-quickstart)
+      * [Quickstart using Colab](#quickstart-using-colab)
       * [With Conda](#with-conda)
    * [Usage](#usage)
       * [Yelp Demo](#yelp-demo)
