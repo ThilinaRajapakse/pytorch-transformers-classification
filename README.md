@@ -1,6 +1,6 @@
 # Update Notice
 
-**The underlying [Pytorch-Transformers](https://github.com/huggingface/pytorch-transformers) library by HuggingFace has been updated substantially since this repo was created. As such, this repo might not be compatible with the current version of the Hugging Face Transformers library. I recommend using [Simple Transformers](https://github.com/ThilinaRajapakse/simpletransformers) (based on the update Hugging Face library) as it is regularly maintained, feature rich, as well as (much) easier to use.**
+**The underlying [Pytorch-Transformers](https://github.com/huggingface/pytorch-transformers) library by HuggingFace has been updated substantially since this repo was created. As such, this repo might not be compatible with the current version of the Hugging Face Transformers library. This repo will not be updated further. I recommend using [Simple Transformers](https://github.com/ThilinaRajapakse/simpletransformers) (based on the update Hugging Face library) as it is regularly maintained, feature rich, as well as (much) easier to use.**
 
 
 # Pytorch-Transformers-Classification
