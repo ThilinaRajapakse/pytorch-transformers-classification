@@ -1,3 +1,5 @@
+This repository is now deprecated. Please use [Simple Transformers](https://github.com/ThilinaRajapakse/simpletransformers) instead.
+
 # Update Notice
 
 The underlying [Pytorch-Transformers](https://github.com/huggingface/pytorch-transformers) library by HuggingFace has been updated substantially since this repo was created. As such, this repo might not be compatible with the current version of the Hugging Face Transformers library. This repo will not be updated further. 
